@@ -20,11 +20,12 @@ public class Speaker {
   private String company;
   private String speaker_bio;
 
-  @Lob
-  @Type(type="org.hibernate.type.BinaryType")
+//  these annotation are added to get jpa to stream binary data in this field
+  @Lob //Large object. helps jpa to deal with lob
+  @Type(type="org.hibernate.type.BinaryType") //helps hibernate to deal with binary data
   private byte[] speaker_photo;
 
-  @ManyToMany(mappedBy = "speakers")
+  @ManyToMany(mappedBy = "speakers")//the other side of existing relationship
   @JsonIgnore
   private List<Session> sessions;
 

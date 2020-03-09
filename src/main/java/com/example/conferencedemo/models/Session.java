@@ -2,12 +2,12 @@ package com.example.conferencedemo.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "sessions")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})//
+//singular class name-> one instance or row of data
 public class Session {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +16,8 @@ public class Session {
   private String session_description;
   private Integer session_length;
 
-  @ManyToMany
-  @JoinTable(
+  @ManyToMany // indicates the relationship type and mapping join table
+  @JoinTable(//defines join table and Foreign key columns
           name = "session_speakers",
           joinColumns = @JoinColumn(name = "session_id"),
           inverseJoinColumns = @JoinColumn(name = "speaker_id"))

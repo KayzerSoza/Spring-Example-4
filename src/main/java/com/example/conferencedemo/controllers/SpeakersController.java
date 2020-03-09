@@ -7,6 +7,7 @@ import com.example.conferencedemo.repositories.SessionRepository;
 import com.example.conferencedemo.repositories.SpeakerRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class SpeakersController {
   }
 
   @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
   public Speaker create(@RequestBody Speaker speaker) {
     return speakerRepository.saveAndFlush(speaker);
   }
@@ -47,6 +49,16 @@ public class SpeakersController {
     BeanUtils.copyProperties(speaker, existingSpeaker, "speaker_id");
     return speakerRepository.saveAndFlush(existingSpeaker);
   }
+
+  //  @RequestMapping(value = "{id}", method = RequestMethod.PATCH)
+  //  public Session updatePartially(@PathVariable Long id, @RequestBody Speaker speaker) {
+  //    // A PATCH would only need what has changed.
+  //    //TODO: Add validation that all attributes are passed in, otherwise return a 400 bad payload
+  //    Speaker existingSpeaker= speakerRepository.getOne(id);
+  //
+  //    BeanUtils.copyProperties(speaker, existingSpeaker, "speaker_id");
+  //    return speakerRepository.saveAndFlush(existingSpeaker);
+  //  }
 
 }
 
